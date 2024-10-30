@@ -35,15 +35,14 @@ client_config = {
 } 
 
 
-
-hl7_message = ""
+hl7_message  = "MSH|^~\&|SendingAppTest9|SendingFac|ReceivingApp|ReceivingFac|202410291200||ADT^A01|123456|P|2.2\rEVN|A01|202410291200\rPV1|1|I|ED^B1^Room 101^Bed 1||||1234^Smith^John^J|||SUR|||||||1234567||67890|||||||||||||||||||||||||202410291200\r"
 
 
 pm1 = HL7Message(hl7_message)
 print(pm1)
 print('-------------------------')
 current_version_id = str(pm1.msh.version_id[0])
-
+print(current_version_id)
 
 if current_version_id in INVALID_VERSION_MAP:
   pm1.msh.version_id.set_attributes(
@@ -51,7 +50,7 @@ if current_version_id in INVALID_VERSION_MAP:
     )
 
   hl7_message = '\r'.join(str(pm1).splitlines())
-  print(pm1)
+  print(hl7_message)
  
 # step 2 - parse message
 # -- uses hl7apy.parser.parse_message
